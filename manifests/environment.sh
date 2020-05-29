@@ -4,22 +4,22 @@
 export ENCRYPTION_KEY=$(head -c 32 /dev/urandom | base64)
 
 # 集群各机器 IP 数组
-export NODE_IPS=(172.27.138.251 172.27.137.229 172.27.138.239)
+export NODE_IPS=(192.168.128.231 192.168.128.232 192.168.128.233)
 
 # 集群各 IP 对应的主机名数组
-export NODE_NAMES=(zhangjun-k8s-01 zhangjun-k8s-02 zhangjun-k8s-03)
+export NODE_NAMES=(k8s-01 k8s-02 k8s-03)
 
 # etcd 集群服务地址列表
-export ETCD_ENDPOINTS="https://172.27.138.251:2379,https://172.27.137.229:2379,https://172.27.138.239:2379"
+export ETCD_ENDPOINTS="https://192.168.128.231:2379,https://192.168.128.232:2379,https://192.168.128.233:2379"
 
 # etcd 集群间通信的 IP 和端口
-export ETCD_NODES="zhangjun-k8s-01=https://172.27.138.251:2380,zhangjun-k8s-02=https://172.27.137.229:2380,zhangjun-k8s-03=https://172.27.138.239:2380"
+export ETCD_NODES="k8s-01=https://192.168.128.231:2380,k8s-02=https://192.168.128.232:2380,k8s-03=https://192.168.128.233:2380"
 
 # kube-apiserver 的反向代理(kube-nginx)地址端口
 export KUBE_APISERVER="https://127.0.0.1:8443"
 
 # 节点间互联网络接口名称
-export IFACE="eth0"
+export IFACE="ens33"
 
 # etcd 数据目录
 export ETCD_DATA_DIR="/data/k8s/etcd/data"
@@ -48,7 +48,7 @@ BOOTSTRAP_TOKEN="41f7e4ba8b7be874fcff18bf5cf41a7c"
 SERVICE_CIDR="10.254.0.0/16"
 
 # Pod 网段，建议 /16 段地址，部署前路由不可达，部署后集群内路由可达(flanneld 保证)
-CLUSTER_CIDR="172.30.0.0/16"
+CLUSTER_CIDR="10.253.0.0/16"
 
 # 服务端口范围 (NodePort Range)
 export NODE_PORT_RANGE="30000-32767"
@@ -63,4 +63,4 @@ export CLUSTER_DNS_SVC_IP="10.254.0.2"
 export CLUSTER_DNS_DOMAIN="cluster.local"
 
 # 将二进制目录 /opt/k8s/bin 加到 PATH 中
-export PATH=/opt/k8s/bin:$PATH
+export PATH=/data/k8s/bin:$PATH
